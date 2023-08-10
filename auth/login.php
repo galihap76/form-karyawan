@@ -64,9 +64,11 @@ if (isset($_SESSION['login'])) {
                 // mengatur cookie jika pengguna memilih opsi "remember me"
                 if ($remember == 'on') {
 
-                    // mengatur waktu kadaluarsa cookie 2 hari
+                    // set cookie
                     $expire = time() + (2 * 24 * 60 * 60);
-                    setcookie('app', hash('sha512', 'app_home'), $expire, '/');
+                    $secure = true;
+                    $httponly = true;
+                    setcookie('app', hash('sha512', 'app_home'), $expire, '/', null, $secure, $httponly);
                 }
                 // bebaskan resource database
                 $stmt->closeCursor();
